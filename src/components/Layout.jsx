@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+const StyledLayout = styled.main`
+  min-height: 500px;
+`
+
 const StyledHeader = styled.header`
   max-width: var(--max-width);
   margin: 0 auto;
@@ -14,12 +18,24 @@ const StyledLogo = styled.img`
     max-width: 200px;
   }
 `
-const Layout = () => {
+
+const StyledFooter = styled.footer`
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+`
+const Layout = ({children}) => {
 
   return (
-    <StyledHeader>
-      <StyledLogo src="/images/FULL_LOGO_COLOR.png" alt="Learnwell"/>
-    </StyledHeader>
+    <StyledLayout>
+      <StyledHeader>
+        <StyledLogo src="/images/FULL_LOGO_COLOR.png" alt="Learnwell"/>
+      </StyledHeader>
+        {children}
+      <StyledFooter>
+        <a href='https://mattumland.dev' target='_blank' >@2024 Matt Umland</a>
+      </StyledFooter>
+    </StyledLayout>
   )
 }
 
