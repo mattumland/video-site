@@ -1,8 +1,24 @@
-# React + Vite
+# Learnwell
+A simple app built as a take-home assessment. Here's the brief...
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+``You are a software engineer, and have been hired by an EdTech company to develop a simple web application that allows users to create, comment on, and watch educational videos. The application should interact with the given backend API and provide a seamless and engaging experience for users. The design and UI are up to you to create.``
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+API: https://take-home-assessment-423502.uc.r.appspot.com/docs
+
+App Functionality: The website must have the following capabilities:
+- Show a list of videos and allow users to select a video from the list.
+- Allow the user to create a new video object with a title, description and a video URL.
+- A user must be able to comment on a video and view comments from other users.
+- Open the videos in full screen with full playback functionality.
+- Include options for adjusting playback speed and volume.
+
+## Tech stack
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [React](https://react.dev/)
+- [Styled Components](https://styled-components.com/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Vite](https://vitejs.dev/)
+
+## Design
