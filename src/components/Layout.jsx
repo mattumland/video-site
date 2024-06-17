@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 const StyledLayout = styled.main`
-  min-height: 500px;
 `
 
 const StyledHeader = styled.header`
   max-width: var(--max-width);
   margin: 0 auto;
+  margin-bottom: .5rem;
 `
 
 const StyledLogo = styled.img`
@@ -25,7 +25,6 @@ const StyledFooter = styled.footer`
   text-align: center;
 `
 const Layout = ({children}) => {
-
   return (
     <StyledLayout>
       <StyledHeader>

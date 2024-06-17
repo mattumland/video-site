@@ -19,6 +19,7 @@ App Functionality: The website must have the following capabilities:
 - [React](https://react.dev/)
 - [Styled Components](https://styled-components.com/)
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [ReactPlayer](https://www.npmjs.com/package/react-player)
 - [Vite](https://vitejs.dev/)
 
 ## Design
