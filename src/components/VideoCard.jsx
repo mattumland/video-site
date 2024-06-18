@@ -8,6 +8,7 @@ const StyledCard = styled.div`
   color: var(--card-text);
   margin: .5em 0;
   border-radius: 3px;
+  width: 100%;
 `
 
 const VideoWrapper = styled.div`
