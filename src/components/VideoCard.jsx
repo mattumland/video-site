@@ -27,13 +27,11 @@ const CardFooter = styled.div`
 
 const VideoTitle = styled.h3`
   font-size: 1.5rem;
-  ${'' /* margin: .5rem 0; */}
 `
 const VideoDetails = styled.div`
  display: flex;
  gap: .5rem;
  align-items: center;
- font-size: .85rem;
 `
 
 const Description = styled.p`
