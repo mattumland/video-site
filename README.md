@@ -23,3 +23,6 @@ App Functionality: The website must have the following capabilities:
 - [Vite](https://vitejs.dev/)
 
 ## Design
+Uncontrolled to keep it simple, relies on FormData api and built in validations
+
+Routers gives each video a unique page (allows for sharing) with a simple lightweight SAP

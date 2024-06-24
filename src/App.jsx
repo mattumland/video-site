@@ -19,7 +19,7 @@ function App() {
     try {
       const response = await fetch(`http://take-home-assessment-423502.uc.r.appspot.com/api/videos?user_id=${user_id}`)
       const videoData = await response.json()
-      const action = { type: 'GET_VIDEOS', videos: videoData.videos}
+      const action = { type: 'UPDATE_VIDEOS', videos: videoData.videos}
       dispatch(action)
     } catch(error) {
       alert(error)
@@ -30,15 +30,11 @@ function App() {
     getUserVideos(state.user_id)
   }, [])
 
-  console.log("state", state)
-
   return (
     <VideoContext.Provider value={[state, dispatch]}>
-      <main>
-        <Layout>
-          <VideoList/>
-        </Layout>
-      </main>
+      <Layout>
+        <VideoList/>
+      </Layout>
     </VideoContext.Provider>
   )
 }

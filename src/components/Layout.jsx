@@ -7,6 +7,7 @@ const StyledHeader = styled.header`
   max-width: var(--max-width);
   margin: 0 auto;
   margin-bottom: .5rem;
+  background-color: var(--card-color);
 `
 
 const StyledLogo = styled.img`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player/lazy'
 import { formatDate } from "../helpers";
 import { CommentCount } from "./CommentCount";
 

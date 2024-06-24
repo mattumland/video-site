@@ -1,11 +1,17 @@
 import styled from 'styled-components'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import VideoContext from '../context/videoContext'
 import VideoCard from './VideoCard'
+import AddVideoButton from './AddVideoButton'
 
 const StyledVideoList = styled.div`
   max-width: var(--max-width);
   margin: 0 auto;
+`
+
+const ListTopContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 const ListTitle = styled.h2`
@@ -15,11 +21,16 @@ const ListTitle = styled.h2`
 
 const ListContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  ${'' /* flex-wrap: wrap; */}
   gap: .5rem;
 `
 
 const VideoList = () => {
   const [state, dispatch] = useContext(VideoContext)
+
+  useEffect(() => {
+  }, [state.videos])
 
   const videoCards = state.videos.map(video => {
     return (
@@ -36,7 +47,10 @@ const VideoList = () => {
 
   return (
     <StyledVideoList>
-      <ListTitle>My Videos</ListTitle>
+      <ListTopContainer>
+        <ListTitle>My Videos</ListTitle>
+        <AddVideoButton/>
+      </ListTopContainer>
       <ListContainer>
         {videoCards}
       </ListContainer>
