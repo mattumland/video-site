@@ -20,10 +20,13 @@ const ListTitle = styled.h2`
 `
 
 const ListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  ${'' /* flex-wrap: wrap; */}
+  display: grid;
   gap: .5rem;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `
 
 const VideoList = () => {
