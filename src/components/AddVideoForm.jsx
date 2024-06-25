@@ -104,8 +104,6 @@ const AddVideoForm = ({onClose}) => {
   const [state, dispatch] = useContext(VideoContext)
   const [error, setError] = useState(null)
 
-  console.log(error)
-
   const createVideo = async (videoData) => {
     try {
       const response = await fetch('http://take-home-assessment-423502.uc.r.appspot.com/api/videos', {

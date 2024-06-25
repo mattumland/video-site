@@ -1,9 +1,15 @@
-import Layout from './components/Layout'
-import VideoList from './components/VideoList'
-import './App.css'
-import { useEffect, useReducer } from 'react'
-import videoReducer from './context/videoReducer'
-import VideoContext from './context/videoContext'
+import Layout from './components/Layout';
+import VideoList from './components/VideoList';
+import { VideoPage, idLoader } from './routes/video';
+import ErrorPage from './routes/error-page';
+import './App.css';
+import { useEffect, useReducer } from 'react';
+import videoReducer from './context/videoReducer';
+import VideoContext from './context/videoContext';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 const initialState = {
   user_id: 'matt_umland',
@@ -11,6 +17,23 @@ const initialState = {
   error: ''
 }
 
+let router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children:[
+      {
+        index: true,
+        element: <VideoList />
+      },
+      {
+        path: "video/:videoId",
+        element: <VideoPage />,
+        loader: idLoader
+      }
+    ]
+  }
+])
 
 function App() {
   const [state, dispatch] = useReducer(videoReducer, initialState)
@@ -32,9 +55,7 @@ function App() {
 
   return (
     <VideoContext.Provider value={[state, dispatch]}>
-      <Layout>
-        <VideoList/>
-      </Layout>
+      <RouterProvider router={router} />
     </VideoContext.Provider>
   )
 }

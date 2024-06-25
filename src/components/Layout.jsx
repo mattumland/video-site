@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Outlet } from "react-router-dom";
 
 const StyledLayout = styled.main`
 `
@@ -31,7 +32,7 @@ const Layout = ({children}) => {
       <StyledHeader>
         <StyledLogo src="/images/FULL_LOGO_COLOR.png" alt="Learnwell"/>
       </StyledHeader>
-        {children}
+      <Outlet />
       <StyledFooter>
         <a href='https://mattumland.dev' target='_blank' >@2024 Matt Umland</a>
       </StyledFooter>

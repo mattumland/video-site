@@ -30,7 +30,7 @@ const ListContainer = styled.div`
 `
 
 const VideoList = () => {
-  const [state, dispatch] = useContext(VideoContext)
+  const [state] = useContext(VideoContext)
 
   useEffect(() => {
   }, [state.videos])
@@ -43,6 +43,7 @@ const VideoList = () => {
         description={video.description}
         commentCount={video.num_comments}
         createdDate={video.created_at}
+        id={video.id}
         key={video.id}
       />
     )

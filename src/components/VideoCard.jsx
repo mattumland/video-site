@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ReactPlayer from 'react-player/lazy'
 import { formatDate } from "../helpers";
 import { CommentCount } from "./CommentCount";
+import { Link } from "react-router-dom";
 
 const StyledCard = styled.div`
   background-color: var(--card-color);
@@ -44,27 +45,29 @@ const AccessibleCommentCount = styled.p`
   font-size: 0;
 `
 
-const VideoCard = ({title, url, description, commentCount, createdDate}) => {
+const VideoCard = ({title, url, description, commentCount, createdDate, id}) => {
   return (
     <StyledCard>
-      <VideoWrapper>
-        <StyledReactPlayer
-          url={url}
-          // controls={true}
-          light={true}
-          width='100%'
-          height='100%'
-        />
-      </VideoWrapper>
-      <CardFooter>
-        <VideoTitle>{title}</VideoTitle>
-        <VideoDetails>
-          <p>{`Posted on ${formatDate(createdDate)}`}</p>
-          <CommentCount count={commentCount}/>
-          <AccessibleCommentCount>{`${commentCount} comments`}</AccessibleCommentCount>
-        </VideoDetails>
-        <Description>{description}</Description>
-      </CardFooter>
+        <VideoWrapper>
+          <StyledReactPlayer
+            url={url}
+            // controls={true}
+            light={true}
+            width='100%'
+            height='100%'
+          />
+        </VideoWrapper>
+        <CardFooter>
+          <Link to={`video/${id}`}>
+            <VideoTitle>{title}</VideoTitle>
+            <VideoDetails>
+              <p>{`Posted on ${formatDate(createdDate)}`}</p>
+              <CommentCount count={commentCount}/>
+              <AccessibleCommentCount>{`${commentCount} comments`}</AccessibleCommentCount>
+            </VideoDetails>
+            <Description>{description}</Description>
+          </Link>
+        </CardFooter>
     </StyledCard>
   )
 }
