@@ -10,11 +10,25 @@ const StyledCard = styled.div`
   margin: .5em 0;
   border-radius: 3px;
   width: 100%;
+  overflow: hidden;
+
+  a {
+    color: var(--card-text);
+    text-decoration: none;
+  }
+
 `
 
 const VideoWrapper = styled.div`
   position: relative;
   padding-top: 56.25%;
+
+  &:hover {
+    transform: scale(1.01);
+    transition: transform 300ms;
+    transition: all 0.2s ease-in-out;
+  }
+
 `
 
 const StyledReactPlayer = styled(ReactPlayer)`
@@ -24,7 +38,9 @@ const StyledReactPlayer = styled(ReactPlayer)`
 `
 
 const CardFooter = styled.div`
-  margin: .5rem;
+  padding: .5rem;
+  border: 1px solid var(--font-color);
+  border-top: none;
 `
 
 const VideoTitle = styled.h3`
@@ -48,26 +64,26 @@ const AccessibleCommentCount = styled.p`
 const VideoCard = ({title, url, description, commentCount, createdDate, id}) => {
   return (
     <StyledCard>
-        <VideoWrapper>
-          <StyledReactPlayer
-            url={url}
-            // controls={true}
-            light={true}
-            width='100%'
-            height='100%'
-          />
-        </VideoWrapper>
-        <CardFooter>
-          <Link to={`video/${id}`}>
-            <VideoTitle>{title}</VideoTitle>
-            <VideoDetails>
-              <p>{`Posted on ${formatDate(createdDate)}`}</p>
-              <CommentCount count={commentCount}/>
-              <AccessibleCommentCount>{`${commentCount} comments`}</AccessibleCommentCount>
-            </VideoDetails>
-            <Description>{description}</Description>
-          </Link>
-        </CardFooter>
+      <Link to={`video/${id}`}>
+      <VideoWrapper>
+        <StyledReactPlayer
+          url={url}
+          // controls={true}
+          light={true}
+          width='100%'
+          height='100%'
+        />
+      </VideoWrapper>
+      <CardFooter>
+        <VideoTitle>{title}</VideoTitle>
+        <VideoDetails>
+          <p>{`Posted on ${formatDate(createdDate)}`}</p>
+          <CommentCount count={commentCount}/>
+          <AccessibleCommentCount>{`${commentCount} comments`}</AccessibleCommentCount>
+        </VideoDetails>
+        <Description>{description}</Description>
+      </CardFooter>
+      </Link>
     </StyledCard>
   )
 }

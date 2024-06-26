@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import VideoContext from '../context/videoContext'
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
+import { addNewVideo, getUserVideos } from "../apiCalls";
 
 const ModalShadow = styled.div`
   position: fixed;
@@ -100,42 +101,21 @@ const SubmitButton = styled.button`
   }
 `
 
-const AddVideoForm = ({onClose}) => {
+const AddVideoForm = ({onClose, setVideos, setLoading}) => {
   const [state, dispatch] = useContext(VideoContext)
   const [error, setError] = useState(null)
 
-  const createVideo = async (videoData) => {
-    try {
-      const response = await fetch('http://take-home-assessment-423502.uc.r.appspot.com/api/videos', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        // body: JSON.stringify(videoData)
-      })
-      console.log("THIS IS HITTING")
-      onClose();
-    } catch (error) {
-      console.log(error)
-      setError("Something went wrong. Please try again.")
-    }
-  }
-
-  const refetchVideos = async (user_id) => {
-    try {
-      const response = await fetch(`http://take-home-assessment-423502.uc.r.appspot.com/api/videos?user_id=${user_id}`)
-      const videoData = await response.json()
-      const action = { type: 'UPDATE_VIDEOS', videos: videoData.videos}
-      dispatch(action)
-    } catch(error) {
-      alert(error)
-    }
-  }
-
   const sendVideoAndRefetch = async (videoData) => {
-    await createVideo(videoData);
-    await refetchVideos(state.user_id);
+    setLoading(true)
+    await addNewVideo(videoData)
+    .catch(err => console.log(err))
+    await getUserVideos(state.user_id)
+    .then((data) => {
+      setVideos(data.videos)
+      setLoading(false)
+      onClose()
+    })
+    .catch(err => alert(err))
   }
 
   const handleSubmit = (event) => {
@@ -169,7 +149,6 @@ const CloseIcon = () => {
             <CloseButton onClick={onClose}>
               <CloseIcon />
             </CloseButton>
-            {/* REAPLCE WITH X ICON */}
           </ModalHeader>
           {error &&
             <ModalError>{error}</ModalError>

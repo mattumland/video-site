@@ -17,7 +17,7 @@ const StyledButton = styled.button`
   }
 `
 
-const AddVideoButton = () => {
+const AddVideoButton = ({setVideos, setLoading}) => {
   const [showModal, setShowModal] = useState(false);
   const modalRoot = document.getElementById('modal-root');
 
@@ -27,7 +27,11 @@ const AddVideoButton = () => {
         New Video
       </StyledButton>
       {showModal && createPortal(
-        <AddVideoForm onClose={() => setShowModal(false)}>I'm a modal</AddVideoForm>,
+        <AddVideoForm
+          setVideos={setVideos}
+          setLoading={setLoading}
+          onClose={() => setShowModal(false)}
+        />,
         modalRoot
       )}
     </>

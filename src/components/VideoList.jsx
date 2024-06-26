@@ -1,8 +1,10 @@
 import styled from 'styled-components'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import VideoContext from '../context/videoContext'
 import VideoCard from './VideoCard'
 import AddVideoButton from './AddVideoButton'
+import { LoadingSpinner } from './Loading'
+import { getUserVideos } from '../apiCalls'
 
 const StyledVideoList = styled.div`
   max-width: var(--max-width);
@@ -31,32 +33,41 @@ const ListContainer = styled.div`
 
 const VideoList = () => {
   const [state] = useContext(VideoContext)
+  const [videos, setVideos] = useState()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-  }, [state.videos])
-
-  const videoCards = state.videos.map(video => {
-    return (
-      <VideoCard
-        title={video.title}
-        url={video.video_url}
-        description={video.description}
-        commentCount={video.num_comments}
-        createdDate={video.created_at}
-        id={video.id}
-        key={video.id}
-      />
-    )
-  })
+    getUserVideos(state.user_id)
+    .then((data) => {
+      setVideos(data.videos)
+      setLoading(false)
+    })
+    .catch(err => alert(err))
+  }, [])
 
   return (
     <StyledVideoList>
       <ListTopContainer>
         <ListTitle>My Videos</ListTitle>
-        <AddVideoButton/>
+        <AddVideoButton setVideos={setVideos} setLoading={setLoading}/>
       </ListTopContainer>
       <ListContainer>
-        {videoCards}
+        {loading
+          ? <LoadingSpinner />
+          : videos.map(video => {
+              return (
+                <VideoCard
+                  title={video.title}
+                  url={video.video_url}
+                  description={video.description}
+                  commentCount={video.num_comments}
+                  createdDate={video.created_at}
+                  id={video.id}
+                  key={video.id}
+                />
+              )
+            })
+        }
       </ListContainer>
     </StyledVideoList>
   )

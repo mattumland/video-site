@@ -1,27 +1,39 @@
 import VideoCard from "../components/VideoCard";
 import VideoContext from '../context/videoContext'
-import { useLoaderData } from "react-router-dom";
-import { useContext, useEffect } from 'react'
-
-export const idLoader = async ( {params} ) => {
-  const videoId = params.videoId
-  return { videoId }
-}
+import { LoadingSpinner } from "../components/Loading";
+import { useParams } from "react-router-dom";
+import { useContext, useState, useEffect } from 'react'
+import { getSingleVideo, getVideoComments } from "../apiCalls";
 
 export const VideoPage = () => {
-  const { videoId } = useLoaderData();
+  const { videoId } = useParams();
   const [state, dispatch] = useContext(VideoContext)
+  const [comments, setComments] = useState()
+  const [video, setVideo] = useState()
+  const [loading, setLoading] = useState(true)
 
-  const video = state.videos.find((video) => video.id === videoId)
+  useEffect(() => {
+    Promise.all([getSingleVideo(videoId), getVideoComments(videoId)])
+    .then((videoData) => {
+      setVideo(videoData[0].video)
+      setComments(videoData[1].comments)
+      setLoading(false)
+    })
+  }, [])
 
   return (
-      <VideoCard
-        title={video.title}
-        url={video.video_url}
-        description={video.description}
-        commentCount={video.num_comments}
-        createdDate={video.created_at}
-        key={video.id}
-      />
+    <>
+      {loading
+        ? <LoadingSpinner />
+        : <VideoCard
+            title={video.title}
+            url={video.video_url}
+            description={video.description}
+            commentCount={video.num_comments}
+            createdDate={video.created_at}
+            key={video.id}
+          />
+      }
+    </>
   )
 }
