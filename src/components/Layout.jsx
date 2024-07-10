@@ -8,6 +8,7 @@ const StyledHeader = styled.header`
   max-width: var(--max-width);
   margin: 0 auto;
   margin-bottom: .5rem;
+  padding: 0 .5rem;
   background-color: var(--card-color);
 `
 
@@ -23,10 +24,10 @@ const StyledLogo = styled.img`
 
 const StyledFooter = styled.footer`
   max-width: var(--max-width);
-  margin: 0 auto;
+  margin: 1rem auto;
   text-align: center;
 `
-const Layout = ({children}) => {
+const Layout = () => {
   return (
     <StyledLayout>
       <StyledHeader>

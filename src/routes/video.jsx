@@ -1,13 +1,11 @@
-import VideoCard from "../components/VideoCard";
-import VideoContext from '../context/videoContext'
+import SingleVideoDisplay from "../components/SingleVideo";
 import { LoadingSpinner } from "../components/Loading";
 import { useParams } from "react-router-dom";
-import { useContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { getSingleVideo, getVideoComments } from "../apiCalls";
 
 export const VideoPage = () => {
   const { videoId } = useParams();
-  const [state, dispatch] = useContext(VideoContext)
   const [comments, setComments] = useState()
   const [video, setVideo] = useState()
   const [loading, setLoading] = useState(true)
@@ -21,17 +19,26 @@ export const VideoPage = () => {
     })
   }, [])
 
+  const refetchComments = async (videoId) => {
+    await getVideoComments(videoId)
+    .then((commentData) => {
+      setComments(commentData.comments)
+    })
+  }
+
   return (
     <>
       {loading
         ? <LoadingSpinner />
-        : <VideoCard
+        : <SingleVideoDisplay
             title={video.title}
             url={video.video_url}
             description={video.description}
             commentCount={video.num_comments}
             createdDate={video.created_at}
-            key={video.id}
+            videoId={videoId}
+            comments={comments}
+            refetchComments={refetchComments}
           />
       }
     </>

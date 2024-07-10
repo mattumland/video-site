@@ -3,13 +3,9 @@ import { useContext, useEffect, useState } from 'react'
 import VideoContext from '../context/videoContext'
 import VideoCard from './VideoCard'
 import AddVideoButton from './AddVideoButton'
+import { MaxWidthContainer } from '../styledElements.js'
 import { LoadingSpinner } from './Loading'
 import { getUserVideos } from '../apiCalls'
-
-const StyledVideoList = styled.div`
-  max-width: var(--max-width);
-  margin: 0 auto;
-`
 
 const ListTopContainer = styled.div`
   display: flex;
@@ -46,7 +42,7 @@ const VideoList = () => {
   }, [])
 
   return (
-    <StyledVideoList>
+    <MaxWidthContainer>
       <ListTopContainer>
         <ListTitle>My Videos</ListTitle>
         <AddVideoButton setVideos={setVideos} setLoading={setLoading}/>
@@ -69,7 +65,7 @@ const VideoList = () => {
             })
         }
       </ListContainer>
-    </StyledVideoList>
+    </MaxWidthContainer>
   )
 }
 

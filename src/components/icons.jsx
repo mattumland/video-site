@@ -1,4 +1,5 @@
 import styled from "styled-components"
+
 const CountContainer = styled.div`
   display: grid;
   align-items: center;
@@ -16,6 +17,7 @@ const CountContainer = styled.div`
 `
 
 export const CommentCount = ({count}) => {
+
   return (
     <CountContainer>
       <svg title="close modal" viewBox="0 0 30 30" width="20px" height="20px">

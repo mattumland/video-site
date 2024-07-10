@@ -21,6 +21,20 @@ export const addNewVideo = (videoData) => {
   })
 }
 
+export const addComment = (commentData) => {
+  return fetch(`${baseURL}/comments`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(commentData)
+  })
+  .then((response) => {
+    return response.json()
+  })
+}
+
 export const getSingleVideo = (video_id) => {
   return fetch(`${baseURL}/single?video_id=${video_id}`)
   .then(response => {
