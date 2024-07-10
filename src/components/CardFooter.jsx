@@ -3,8 +3,8 @@ import { CommentCount } from "./icons";
 import { formatDate } from "../helpers";
 
 const FooterContainer = styled.div`
-  margin-top: ${(props) => props.card ? '0' : '.5rem'};
-  padding: ${(props) => props.card ? '.5rem' : '0'};
+  margin-top: ${(props) => props.$card ? '0' : '.5rem'};
+  padding: ${(props) => props.$card ? '.5rem' : '0'};
   border-top: none;
 `
 
@@ -24,8 +24,8 @@ const VideoDetails = styled.div`
 
 const Description = styled.p`
   margin-top: .5rem;
-  height: ${(props) => props.card ? '2rem' : 'auto'};
-  overflow: ${(props) => props.card ? 'hidden' : 'visible'};
+  height: ${(props) => props.$card ? '2rem' : 'auto'};
+  overflow: ${(props) => props.$card ? 'hidden' : 'visible'};
 `
 
 const AccessibleCommentCount = styled.p`
@@ -34,14 +34,14 @@ const AccessibleCommentCount = styled.p`
 
 const CardFooter = ({title, description, commentCount, createdDate, card = false}) => {
   return (
-    <FooterContainer card={card}>
+    <FooterContainer $card>
       <VideoTitle>{title}</VideoTitle>
       <VideoDetails>
         <p>{`Posted on ${formatDate(createdDate)}`}</p>
         {card && <CommentCount count={commentCount}/>}
         <AccessibleCommentCount>{`${commentCount} comments`}</AccessibleCommentCount>
       </VideoDetails>
-      <Description card={card}>{description}</Description>
+      <Description $card>{description}</Description>
     </FooterContainer>
   )
 }

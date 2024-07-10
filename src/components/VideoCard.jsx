@@ -43,7 +43,7 @@ const VideoCard = ({title, url, description, commentCount, createdDate, id}) => 
         description={description}
         commentCount={commentCount}
         createdDate={createdDate}
-        card={true}
+        $card
       />
       </Link>
     </StyledCard>
