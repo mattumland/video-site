@@ -26,6 +26,10 @@ const StyledFooter = styled.footer`
   max-width: var(--max-width);
   margin: 1rem auto;
   text-align: center;
+
+  a {
+    color: var(--font-color);
+  }
 `
 const Layout = () => {
   return (

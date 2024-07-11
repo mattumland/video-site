@@ -27,6 +27,22 @@ const ListContainer = styled.div`
   }
 `
 
+const EmptyListContainer = styled.div`
+  text-align: center;
+  min-height: 650px;
+  grid-area: 1 / 1 / 2 / 3;
+  color: var(--font-color);
+  font-size: 1.75rem;
+
+  p {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 726px) {
+    min-height: 350px;
+  }
+`
+
 const VideoList = () => {
   const [state] = useContext(VideoContext)
   const [videos, setVideos] = useState()
@@ -40,31 +56,37 @@ const VideoList = () => {
     })
     .catch(err => alert(err))
   }, [])
-
+    console.log(videos.length)
   return (
     <MaxWidthContainer>
       <ListTopContainer>
         <ListTitle>My Videos</ListTitle>
         <AddVideoButton setVideos={setVideos} setLoading={setLoading}/>
       </ListTopContainer>
-      <ListContainer>
         {loading
           ? <LoadingSpinner />
-          : videos.map(video => {
-              return (
-                <VideoCard
-                  title={video.title}
-                  url={video.video_url}
-                  description={video.description}
-                  commentCount={video.num_comments}
-                  createdDate={video.created_at}
-                  id={video.id}
-                  key={video.id}
-                />
-              )
-            })
+          : <ListContainer>
+              {videos.length === 0
+                ? <EmptyListContainer>
+                  <p>You don't have any videos.</p>
+                  <p>Upload a video to get started.</p>
+                 </EmptyListContainer>
+                : videos.map(video => {
+                  return (
+                    <VideoCard
+                      title={video.title}
+                      url={video.video_url}
+                      description={video.description}
+                      commentCount={video.num_comments}
+                      createdDate={video.created_at}
+                      id={video.id}
+                      key={video.id}
+                    />
+                  )
+                })
+              }
+            </ListContainer>
         }
-      </ListContainer>
     </MaxWidthContainer>
   )
 }
