@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import CardFooter from "./CardFooter";
 import { VideoWrapper, StyledReactPlayer } from "../styledElements.js"
+import { LoadingSpinner } from "./Loading.jsx";
 
 const StyledCard = styled.div`
   background-color: var(--card-color);
@@ -36,6 +37,7 @@ const VideoCard = ({title, url, description, commentCount, createdDate, id}) => 
           light={true}
           width='100%'
           height='100%'
+          fallback={<LoadingSpinner />}
         />
       </HoverWrapper>
       <CardFooter
