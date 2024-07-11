@@ -14,7 +14,6 @@ const VideoTitle = styled.h3`
 const VideoDetails = styled.div`
  display: flex;
  gap: .5rem;
- align-items: center;
 
  p {
   margin-top: .25rem;

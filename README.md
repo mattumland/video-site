@@ -26,3 +26,9 @@ App Functionality: The website must have the following capabilities:
 Uncontrolled to keep it simple, relies on FormData api and built in validations
 
 Routers gives each video a unique page (allows for sharing) with a simple lightweight SAP
+
+use light player to improve tabbablity by removing a bunch of other stuff
+
+
+## Thumbnails
+Limitation of reactplayer is thumbnails, added a check to make sure its from a site that can get the thumbnail provided a fallback if not
