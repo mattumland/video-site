@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import VideoContext from '../context/videoContext'
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
+import { addNewVideo, getUserVideos } from "../apiCalls";
 
 const ModalShadow = styled.div`
   position: fixed;
@@ -41,7 +42,7 @@ const ModalError = styled.p`
 
 const ModalHeader = styled.div`
   padding: .5rem;
-  background-color: var(--font-color);
+  background-color: var(--main-color);
   color: var(--card-color);
   display: flex;
   justify-content: space-between;
@@ -57,7 +58,7 @@ const CloseButton = styled.div`
   text-align: center;
 
   &:hover {
-    color: var(--font-color);
+    color: var(--main-color);
     background-color: var(--card-color);
   }
 
@@ -69,7 +70,7 @@ const CloseButton = styled.div`
 const CloseSvg = styled.svg`
   fill: var(--card-color);
   &:hover {
-    fill: var(--font-color);
+    fill: var(--main-color);
   }
 `
 
@@ -80,14 +81,14 @@ const StyledForm = styled.form`
 const StyledInput = styled.input`
   width: 100%;
   margin: .25rem 0 .75rem 0;
-  border: 1px solid var(--font-color);
+  border: 1px solid var(--main-color);
   border-radius: 3px;
   min-height: 1.75rem;
 `
 
 const SubmitButton = styled.button`
-  color: var(--font-color);
-  border: 2px solid var(--font-color);
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
   border-radius: 3px;
   width: 100%;
   margin-top: .5rem;
@@ -96,48 +97,25 @@ const SubmitButton = styled.button`
 
   &:hover {
     color: var(--card-color);
-    background-color: var(--font-color);
+    background-color: var(--main-color);
   }
 `
 
-const AddVideoForm = ({onClose}) => {
-  const [state, dispatch] = useContext(VideoContext)
+const AddVideoForm = ({onClose, setVideos, setLoading}) => {
+  const [state] = useContext(VideoContext)
   const [error, setError] = useState(null)
 
-  console.log(error)
-
-  const createVideo = async (videoData) => {
-    try {
-      const response = await fetch('http://take-home-assessment-423502.uc.r.appspot.com/api/videos', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        // body: JSON.stringify(videoData)
-      })
-      console.log("THIS IS HITTING")
-      onClose();
-    } catch (error) {
-      console.log(error)
-      setError("Something went wrong. Please try again.")
-    }
-  }
-
-  const refetchVideos = async (user_id) => {
-    try {
-      const response = await fetch(`http://take-home-assessment-423502.uc.r.appspot.com/api/videos?user_id=${user_id}`)
-      const videoData = await response.json()
-      const action = { type: 'UPDATE_VIDEOS', videos: videoData.videos}
-      dispatch(action)
-    } catch(error) {
-      alert(error)
-    }
-  }
-
   const sendVideoAndRefetch = async (videoData) => {
-    await createVideo(videoData);
-    await refetchVideos(state.user_id);
+    setLoading(true)
+    await addNewVideo(videoData)
+    .catch(err => console.log(err))
+    await getUserVideos(state.user_id)
+    .then((data) => {
+      setVideos(data.videos)
+      setLoading(false)
+      onClose()
+    })
+    .catch(err => setError(err))
   }
 
   const handleSubmit = (event) => {
@@ -171,7 +149,6 @@ const CloseIcon = () => {
             <CloseButton onClick={onClose}>
               <CloseIcon />
             </CloseButton>
-            {/* REAPLCE WITH X ICON */}
           </ModalHeader>
           {error &&
             <ModalError>{error}</ModalError>

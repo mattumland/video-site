@@ -1,13 +1,11 @@
 import styled from 'styled-components'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import VideoContext from '../context/videoContext'
 import VideoCard from './VideoCard'
 import AddVideoButton from './AddVideoButton'
-
-const StyledVideoList = styled.div`
-  max-width: var(--max-width);
-  margin: 0 auto;
-`
+import { MaxWidthContainer } from '../styledElements.js'
+import { LoadingSpinner } from './Loading'
+import { getUserVideos } from '../apiCalls'
 
 const ListTopContainer = styled.div`
   display: flex;
@@ -16,7 +14,7 @@ const ListTopContainer = styled.div`
 
 const ListTitle = styled.h2`
   font-size: 2.5rem;
-  color: var(--font-color);
+  color: var(--main-color);
 `
 
 const ListContainer = styled.div`
@@ -29,35 +27,67 @@ const ListContainer = styled.div`
   }
 `
 
+const EmptyListContainer = styled.div`
+  text-align: center;
+  min-height: 650px;
+  grid-area: 1 / 1 / 2 / 3;
+  color: var(--main-color);
+  font-size: 1.75rem;
+
+  p {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 726px) {
+    min-height: 350px;
+  }
+`
+
 const VideoList = () => {
-  const [state, dispatch] = useContext(VideoContext)
+  const [state] = useContext(VideoContext)
+  const [videos, setVideos] = useState()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-  }, [state.videos])
-
-  const videoCards = state.videos.map(video => {
-    return (
-      <VideoCard
-        title={video.title}
-        url={video.video_url}
-        description={video.description}
-        commentCount={video.num_comments}
-        createdDate={video.created_at}
-        key={video.id}
-      />
-    )
-  })
+    getUserVideos(state.user_id)
+    .then((data) => {
+      setVideos(data.videos)
+      setLoading(false)
+    })
+    .catch(err => alert(err))
+  }, [])
 
   return (
-    <StyledVideoList>
+    <MaxWidthContainer>
       <ListTopContainer>
         <ListTitle>My Videos</ListTitle>
-        <AddVideoButton/>
+        <AddVideoButton setVideos={setVideos} setLoading={setLoading}/>
       </ListTopContainer>
-      <ListContainer>
-        {videoCards}
-      </ListContainer>
-    </StyledVideoList>
+        {loading
+          ? <LoadingSpinner />
+          : <ListContainer>
+              {videos.length === 0
+                ? <EmptyListContainer>
+                  <p>You don't have any videos.</p>
+                  <p>Upload a video to get started.</p>
+                 </EmptyListContainer>
+                : videos.map(video => {
+                  return (
+                    <VideoCard
+                      title={video.title}
+                      url={video.video_url}
+                      description={video.description}
+                      commentCount={video.num_comments}
+                      createdDate={video.created_at}
+                      id={video.id}
+                      key={video.id}
+                    />
+                  )
+                })
+              }
+            </ListContainer>
+        }
+    </MaxWidthContainer>
   )
 }
 
