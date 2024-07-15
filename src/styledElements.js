@@ -11,7 +11,10 @@ export const StyledReactPlayer = styled(ReactPlayer)`
   position: absolute;
   top: 0;
   left: 0;
-  pointer-events: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export const MaxWidthContainer = styled.div`
@@ -25,12 +28,12 @@ export const FlexContainer = styled.div`
 `
 
 export const StyledButton = styled.button`
-  color: var(--font-color);
-  border: 2px solid var(--font-color);
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
   border-radius: 5px;
   padding: 0 .5rem;
   font-weight: bold;
-  background-color: var(--background);
+  background-color: var(--card-color);
 
   &:disabled {
     cursor: default;
@@ -41,13 +44,13 @@ export const StyledButton = styled.button`
     !props.disabled &&
       `&:hover {
         color: var(--card-color);
-        background-color: var(--font-color);
+        background-color: var(--main-color);
     }`}
 
   ${(props) =>
     !props.disabled &&
       `&:active {
         color: var(--card-color);
-        background-color: var(--font-color);
+        background-color: var(--main-color);
     }`}
 `

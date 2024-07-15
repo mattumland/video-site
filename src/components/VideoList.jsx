@@ -14,7 +14,7 @@ const ListTopContainer = styled.div`
 
 const ListTitle = styled.h2`
   font-size: 2.5rem;
-  color: var(--font-color);
+  color: var(--main-color);
 `
 
 const ListContainer = styled.div`
@@ -31,7 +31,7 @@ const EmptyListContainer = styled.div`
   text-align: center;
   min-height: 650px;
   grid-area: 1 / 1 / 2 / 3;
-  color: var(--font-color);
+  color: var(--main-color);
   font-size: 1.75rem;
 
   p {
@@ -56,7 +56,7 @@ const VideoList = () => {
     })
     .catch(err => alert(err))
   }, [])
-    console.log(videos.length)
+
   return (
     <MaxWidthContainer>
       <ListTopContainer>

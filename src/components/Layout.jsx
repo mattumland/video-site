@@ -1,13 +1,10 @@
 import styled from "styled-components";
-import { Outlet } from "react-router-dom";
-
-const StyledLayout = styled.main`
-`
+import { Outlet, Link } from "react-router-dom";
 
 const StyledHeader = styled.header`
   max-width: var(--max-width);
   margin: 0 auto;
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
   padding: 0 .5rem;
   background-color: var(--card-color);
 `
@@ -28,20 +25,22 @@ const StyledFooter = styled.footer`
   text-align: center;
 
   a {
-    color: var(--font-color);
+    color: var(--main-color);
   }
 `
 const Layout = () => {
   return (
-    <StyledLayout>
+    <main>
       <StyledHeader>
-        <StyledLogo src="/images/FULL_LOGO_COLOR.png" alt="Learnwell"/>
+        <Link to='/'>
+          <StyledLogo src="/images/FULL_LOGO_COLOR.png" alt="Learnwell" />
+        </Link>
       </StyledHeader>
       <Outlet />
       <StyledFooter>
         <a href='https://mattumland.dev' target='_blank' >@2024 Matt Umland</a>
       </StyledFooter>
-    </StyledLayout>
+    </main>
   )
 }
 

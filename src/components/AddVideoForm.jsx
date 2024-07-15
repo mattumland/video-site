@@ -42,7 +42,7 @@ const ModalError = styled.p`
 
 const ModalHeader = styled.div`
   padding: .5rem;
-  background-color: var(--font-color);
+  background-color: var(--main-color);
   color: var(--card-color);
   display: flex;
   justify-content: space-between;
@@ -58,7 +58,7 @@ const CloseButton = styled.div`
   text-align: center;
 
   &:hover {
-    color: var(--font-color);
+    color: var(--main-color);
     background-color: var(--card-color);
   }
 
@@ -70,7 +70,7 @@ const CloseButton = styled.div`
 const CloseSvg = styled.svg`
   fill: var(--card-color);
   &:hover {
-    fill: var(--font-color);
+    fill: var(--main-color);
   }
 `
 
@@ -81,14 +81,14 @@ const StyledForm = styled.form`
 const StyledInput = styled.input`
   width: 100%;
   margin: .25rem 0 .75rem 0;
-  border: 1px solid var(--font-color);
+  border: 1px solid var(--main-color);
   border-radius: 3px;
   min-height: 1.75rem;
 `
 
 const SubmitButton = styled.button`
-  color: var(--font-color);
-  border: 2px solid var(--font-color);
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
   border-radius: 3px;
   width: 100%;
   margin-top: .5rem;
@@ -97,12 +97,12 @@ const SubmitButton = styled.button`
 
   &:hover {
     color: var(--card-color);
-    background-color: var(--font-color);
+    background-color: var(--main-color);
   }
 `
 
 const AddVideoForm = ({onClose, setVideos, setLoading}) => {
-  const [state, dispatch] = useContext(VideoContext)
+  const [state] = useContext(VideoContext)
   const [error, setError] = useState(null)
 
   const sendVideoAndRefetch = async (videoData) => {
@@ -115,7 +115,7 @@ const AddVideoForm = ({onClose, setVideos, setLoading}) => {
       setLoading(false)
       onClose()
     })
-    .catch(err => alert(err))
+    .catch(err => setError(err))
   }
 
   const handleSubmit = (event) => {

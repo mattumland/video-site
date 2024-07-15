@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import VideoContext from '../context/videoContext'
 import { formatDate, formatUserId, formatUserInitials } from "../helpers";
-import { FlexContainer, StyledButton } from "../styledElements";
+import { StyledButton } from "../styledElements";
 import { addComment } from "../apiCalls";
 
 const CommentForm = styled.form`
@@ -10,12 +10,12 @@ const CommentForm = styled.form`
   flex-direction: column;
   margin-top: 1rem;
   padding: .5rem;
-  border: 1px solid var(--font-color);
+  border: 1px solid var(--main-color);
   border-radius: 5px;
 
   input {
     border: none;
-    border-bottom: 1px solid var(--font-color);
+    border-bottom: 1px solid var(--main-color);
     font-style: italic;
     margin-top: .5rem;
   }
@@ -40,13 +40,22 @@ const Comment = styled.div`
 const CommentInitials = styled.p`
   min-width: 3rem;
   height: 3rem;
-  background-color: var(--font-color);
+  background-color: var(--main-color);
   margin-right: .5rem;
   padding: 1rem 0;
   border-radius: 50%;
   text-align: center;
   font-weight: bold;
   color: var(--card-color);
+`
+
+const CommentDetails = styled.div`
+  display: flex;
+  gap: .5rem;
+
+  p {
+    text-decoration: underline;
+  }
 `
 
 const CommentContent = styled.p`
@@ -95,10 +104,10 @@ const CommentSection = ({videoId, comments, refetchComments}) => {
           <Comment key={comment.id}>
             <CommentInitials>{formatUserInitials(comment.user_id)}</CommentInitials>
             <div>
-              <FlexContainer>
+              <CommentDetails>
                 <p>{formatUserId(comment.user_id)}</p>
                 <span>{formatDate(comment.created_at)}</span>
-              </FlexContainer>
+              </CommentDetails>
               <CommentContent>{comment.content}</CommentContent>
             </div>
           </Comment>

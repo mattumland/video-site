@@ -24,16 +24,16 @@ const ErrorContainer = styled(MaxWidthContainer)`
   }
 
   a {
-    color: var(--font-color);
+    color: var(--main-color);
     margin: 0 auto;
     padding: 1rem;
-    border: 1px solid var(--font-color);
+    border: 1px solid var(--main-color);
     border-radius: 5px;
     text-decoration: none;
 
     &:hover {
       color: white;
-      background-color: var(--font-color);
+      background-color: var(--main-color);
     }
   }
 `

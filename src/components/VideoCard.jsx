@@ -9,23 +9,29 @@ const StyledCard = styled(Link)`
   color: var(--card-text);
   margin: .5em 0;
   border-radius: 3px;
-  border: 1px solid var(--font-color);
+  border: 1px solid var(--main-color);
   width: 100%;
-  overflow: hidden;
   text-decoration: none;
+
+  &:hover {
+    color: grey;
+    transition: all 0.2s ease-in-out;
+  }
+`
+
+const OverflowContainer = styled.div`
+  overflow: hidden;
 `
 
 const HoverWrapper = styled(VideoWrapper)`
-  z-index: 0;
-
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
     transition: transform 300ms;
     transition: all 0.2s ease-in-out;
   }
 
   &:focus {
-    transform: scale(1.02);
+    transform: scale(1.05);
     transition: transform 300ms;
     transition: all 0.2s ease-in-out;
   }
@@ -37,7 +43,7 @@ const VideoPlaceContainer = styled.div`
   text-align: center;
   padding: 5rem 0;
   color: var(--card-color);
-  background-color: var(--font-color);
+  background-color: var(--main-color);
 
   img {
     max-width: 125px;
@@ -80,16 +86,19 @@ const VideoCard = ({title, url, description, commentCount, createdDate, id}) => 
 
   return (
     <StyledCard to={`video/${id}`}>
-      <HoverWrapper>
-        <StyledReactPlayer
-          url={url}
-          width='100%'
-          height='100%'
-          playIcon={<BlankIcon />}
-          light={needsPlaceHolder() ? <VideoPlaceHolder /> : true}
-          fallback={<LoadingSpinner />}
-        />
-      </HoverWrapper>
+      <OverflowContainer>
+        <HoverWrapper>
+          <StyledReactPlayer
+            url={url}
+            width='100%'
+            height='100%'
+            playIcon={<BlankIcon />}
+            light={needsPlaceHolder() ? <VideoPlaceHolder /> : true}
+            fallback={<LoadingSpinner />}
+            previewTabIndex={-1}
+          />
+        </HoverWrapper>
+      </OverflowContainer>
       <CardFooter
         title={title}
         description={description}
