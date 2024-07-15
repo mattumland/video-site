@@ -23,7 +23,19 @@ App Functionality: The website must have the following capabilities:
 
 ## Installation
 1. Clone the repo at https://github.com/mattumland/video-site
-2.
+
+   `git clone git@github.com:mattumland/video-site.git`
+2. Navigate into the cloned directory
+
+   `cd video-site`
+3. Install the project dependencies
+
+   `npm i`
+4. Start the local development server
+
+   `npm run dev`
+
+
 
 ## Design
 #### Data
@@ -61,4 +73,15 @@ Individual video page, mobile
 ![alt text](image-3.png)
 
 ## Testing
-To test the app, you can either install it locally on your machine or
+To test the app, [install it](#installation) locally on your machine. The current build has a hard-coded value for the `user_id` of `matt_umland`, which will provide a list of video that were uploaded during development. To confirm the complete functionality of the app, perform the following tasks:
+
+1. Scroll through the index page to see the current list of uploaded videos.
+2. Click `new video` to see the form modal.
+3. Ensure the fields are all required by trying to submit the form with an empty field.
+4. Exit the modal by either clicking outside the form or clicking the `x` icon.
+5. Complete the modal form and ensure the new card appears on the index page.
+6. Hover over a video to confirm hover states are functioning.
+7. Click a video to view the single video page.
+8. Add a comment to the video and ensure it appears without a complete page re-render.
+9. Watch the video, verifying that all video functions provided by the hosting site are functional within the embedded video.
+10. Click the `Learnwell` logo in the header to return to the homepage.
