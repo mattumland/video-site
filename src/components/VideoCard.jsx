@@ -37,11 +37,11 @@ const HoverWrapper = styled(VideoWrapper)`
   }
 `
 
-const VideoPlaceContainer = styled.div`
+const VideoPlaceholderContainer = styled.div`
   width: 100%;
   height: 100%;
   text-align: center;
-  padding: 5rem 0;
+  padding: 2rem 0;
   color: var(--card-color);
   background-color: var(--main-color);
 
@@ -52,9 +52,9 @@ const VideoPlaceContainer = styled.div`
 
 const VideoPlaceHolder = () => {
   return (
-    <VideoPlaceContainer>
+    <VideoPlaceholderContainer>
       <img src="images/LOGO_ICON.png" alt="Learnwell logo"/>
-    </VideoPlaceContainer>
+    </VideoPlaceholderContainer>
   )
 }
 
