@@ -35,8 +35,6 @@ App Functionality: The website must have the following capabilities:
 
    `npm run dev`
 
-
-
 ## Design
 #### Data
 The simple nature of the app made prop drilling a viable option for moving data around. The user name is passed down the tree via Context API since that is a standard place to store authentication data.
