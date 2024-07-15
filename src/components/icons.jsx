@@ -12,12 +12,11 @@ const CountContainer = styled.div`
     color: var(--card-color);
     grid-area: 1 / 1 / 2 / 2;
     text-align: center;
-    padding-bottom: 2px;
+    padding-bottom: 4px;
   }
 `
 
 export const CommentCount = ({count}) => {
-
   return (
     <CountContainer>
       <svg title="close modal" viewBox="0 0 30 30" width="20px" height="20px">

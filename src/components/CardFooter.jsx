@@ -17,7 +17,6 @@ const VideoDetails = styled.div`
 
  p {
   margin-top: .25rem;
-  font-style: italic;
  }
 `
 
@@ -32,17 +31,30 @@ const AccessibleCommentCount = styled.p`
 `
 
 const CardFooter = ({title, description, commentCount, createdDate, card = false}) => {
-  return (
-    <FooterContainer $card>
-      <VideoTitle>{title}</VideoTitle>
-      <VideoDetails>
-        <p>{`Posted on ${formatDate(createdDate)}`}</p>
-        {card && <CommentCount count={commentCount}/>}
-        <AccessibleCommentCount>{`${commentCount} comments`}</AccessibleCommentCount>
-      </VideoDetails>
-      <Description $card>{description}</Description>
-    </FooterContainer>
-  )
+  if (card) {
+    return (
+      <FooterContainer $card>
+        <VideoTitle>{title}</VideoTitle>
+        <VideoDetails>
+          <p>{`Posted on ${formatDate(createdDate)}`}</p>
+          <CommentCount count={commentCount}/>
+          <AccessibleCommentCount>{`${commentCount} comments`}</AccessibleCommentCount>
+        </VideoDetails>
+        <Description $card>{description}</Description>
+      </FooterContainer>
+    )
+  } else {
+    return (
+      <FooterContainer>
+        <VideoTitle>{title}</VideoTitle>
+        <VideoDetails>
+          <p>{`Posted on ${formatDate(createdDate)}`}</p>
+          <AccessibleCommentCount>{`${commentCount} comments`}</AccessibleCommentCount>
+        </VideoDetails>
+        <Description>{description}</Description>
+      </FooterContainer>
+    )
+  }
 }
 
 export default CardFooter

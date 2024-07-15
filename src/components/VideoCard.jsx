@@ -53,7 +53,7 @@ const VideoPlaceContainer = styled.div`
 const VideoPlaceHolder = () => {
   return (
     <VideoPlaceContainer>
-      <img src="images/LOGO_ICON.png" />
+      <img src="images/LOGO_ICON.png" alt="Learnwell logo"/>
     </VideoPlaceContainer>
   )
 }
@@ -104,7 +104,7 @@ const VideoCard = ({title, url, description, commentCount, createdDate, id}) => 
         description={description}
         commentCount={commentCount}
         createdDate={createdDate}
-        $card
+        card={true}
       />
     </StyledCard>
   )

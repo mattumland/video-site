@@ -23,7 +23,6 @@ const SingleVideoDisplay = ({
         description={description}
         commentCount={commentCount}
         createdDate={createdDate}
-        $card
       />
       <CommentSection videoId={videoId} comments={comments} refetchComments={refetchComments} />
     </MaxWidthContainer>
