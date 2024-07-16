@@ -52,8 +52,6 @@ const VideoList = () => {
     getUserVideos(state.user_id)
     .then((data) => {
       setVideos(data.videos)
-      // setVideos([])
-
       setLoading(false)
     })
     .catch(err => alert(err))
