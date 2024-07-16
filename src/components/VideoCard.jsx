@@ -38,15 +38,19 @@ const HoverWrapper = styled(VideoWrapper)`
 `
 
 const VideoPlaceholderContainer = styled.div`
+  display: flex;
   width: 100%;
   height: 100%;
-  text-align: center;
+  align-items: center;
   padding: 2rem 0;
   color: var(--card-color);
   background-color: var(--main-color);
 
   img {
     max-width: 125px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `
 
