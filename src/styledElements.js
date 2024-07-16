@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import ReactPlayer from 'react-player/lazy'
 
-
 export const VideoWrapper = styled.div`
   position: relative;
   padding-top: 56.25%;

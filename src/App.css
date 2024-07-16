@@ -1,7 +1,7 @@
 :root {
   /* variables */
   --max-width: 1280px;
-  --main-color: #47B99B;
+  --main-color: #32888C;
   --card-color: rgba(255, 255, 255, 0.87);
   --card-text: #242424;
   background-color: var(--card-color);
@@ -104,6 +104,8 @@ button {
   padding: 0;
   border: 0;
   font-size: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* HTML5 display-role reset for older browsers */

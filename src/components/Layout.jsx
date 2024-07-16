@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { Outlet, Link } from "react-router-dom";
 
+const HeaderContainer = styled.div`
+  width: 100%;
+  background-color: var(--main-color);
+`
+
 const StyledHeader = styled.header`
   max-width: var(--max-width);
   margin: 0 auto;
   margin-bottom: 1rem;
   padding: 0 .5rem;
-  background-color: var(--card-color);
 `
 
 const StyledLogo = styled.img`
@@ -31,11 +35,13 @@ const StyledFooter = styled.footer`
 const Layout = () => {
   return (
     <main>
-      <StyledHeader>
-        <Link to='/'>
-          <StyledLogo src="/images/FULL_LOGO_COLOR.png" alt="Learnwell" />
-        </Link>
-      </StyledHeader>
+      <HeaderContainer>
+        <StyledHeader>
+          <Link to='/'>
+            <StyledLogo src="/images/FULL_LOGO_WHITE.png" alt="Learnwell" />
+          </Link>
+        </StyledHeader>
+      </HeaderContainer>
       <Outlet />
       <StyledFooter>
         <a href='https://mattumland.dev' target='_blank' >@2024 Matt Umland</a>

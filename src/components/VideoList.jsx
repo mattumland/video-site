@@ -29,17 +29,17 @@ const ListContainer = styled.div`
 
 const EmptyListContainer = styled.div`
   text-align: center;
-  min-height: 650px;
+  min-height: 850px;
   grid-area: 1 / 1 / 2 / 3;
   color: var(--main-color);
   font-size: 1.75rem;
 
   p {
-    margin-top: 1rem;
+    margin-top: 5rem;
   }
 
   @media (max-width: 726px) {
-    min-height: 350px;
+    min-height: 450px;
   }
 `
 
@@ -52,6 +52,8 @@ const VideoList = () => {
     getUserVideos(state.user_id)
     .then((data) => {
       setVideos(data.videos)
+      // setVideos([])
+
       setLoading(false)
     })
     .catch(err => alert(err))
@@ -68,7 +70,6 @@ const VideoList = () => {
           : <ListContainer>
               {videos.length === 0
                 ? <EmptyListContainer>
-                  <p>You don't have any videos.</p>
                   <p>Upload a video to get started.</p>
                  </EmptyListContainer>
                 : videos.map(video => {
